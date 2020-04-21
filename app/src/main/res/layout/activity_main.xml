@@ -7,6 +7,16 @@
         android:layout_height="match_parent"
         tools:context=".MainActivity">
 
+    <EditText
+            android:id="@+id/lab_33MutationPercent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="20dp"
+            android:ems="10"
+            android:hint="Mutation percent"
+            android:inputType="numberDecimal"
+            app:layout_constraintStart_toStartOf="parent"/>
 
     <EditText
             android:id="@+id/numberOfMutation"
@@ -129,7 +139,7 @@
             android:onClick="onButtonClick"
             android:text = " Find Roots "
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView3"
+            app:layout_constraintTop_toBottomOf="@+id/lab_33MutationPercent"
             android:layout_marginLeft="120dp"/>
 
     <TextView
@@ -151,6 +161,4 @@
             android:text = ""
             android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/a"
-            android:layout_marginLeft="33dp"/>
-</androidx.constraintlayout.widget.ConstraintLayout>
+

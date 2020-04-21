@@ -27,10 +27,16 @@ public class MainActivity extends AppCompatActivity {
         String inputC = ((EditText) findViewById(R.id.c)).getText().toString();
         String inputD = ((EditText) findViewById(R.id.d)).getText().toString();
         String inputY = ((EditText) findViewById(R.id.y)).getText().toString();
-
-        if (inputA.isEmpty() || inputB.isEmpty() || inputC.isEmpty() || inputD.isEmpty() || inputY.isEmpty()) {
+        String inputMutationPercent = ((EditText) findViewById(R.id.lab_33MutationPercent))
+                .getText().toString();
+        if (inputA.isEmpty() || inputB.isEmpty() || inputC.isEmpty() || inputD.isEmpty() || inputY.isEmpty() || inputMutationPercent.isEmpty()) {
             Toast.makeText(this, "Введіть всі значення рівняння!", Toast.LENGTH_SHORT).show();
             return;
+        }
+        double mutationPercent = Double.parseDouble(inputMutationPercent);
+        if (mutationPercent < 0 || mutationPercent > 1) {
+            Toast.makeText(this, "Mutation percent should be from 0 to 1!",
+                    Toast.LENGTH_SHORT).show();
         }
         a = Integer.parseInt(inputA);
         b = Integer.parseInt(inputB);
@@ -103,14 +109,16 @@ public class MainActivity extends AppCompatActivity {
         generateMutation(newGen);
         return newGen;
     }
-    private int[][] generateMutation(int[][] population){
-        double mutationProbabilities = 0.1;
-        int numberOfMutation = (int) Math.round(mutationProbabilities*N*N);
+    private int[][] generateMutation(int[][] population, double mutationPercent){
+        if (RANDOM.nextDouble() < mutationPercent) {
+            double mutationProbabilities = 0.1;
+            int numberOfMutation = (int) Math.round(mutationProbabilities*N*N);
 
-        for (int i = 0; i < numberOfMutation; i++) {
-            population[RANDOM.nextInt(N)][RANDOM.nextInt(N)] = RANDOM.nextInt(y);
+            for (int i = 0; i < numberOfMutation; i++) {
+                population[RANDOM.nextInt(N)][RANDOM.nextInt(N)] = RANDOM.nextInt(y);
+            }
+            return population;
         }
-        return population;
     }
 
     private int peekRoot(double[] probabilities) {
